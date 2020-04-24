@@ -18,11 +18,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        textname.text = "MGBACHI UGOCHUKWU"
-        textskill.text = "Mobile Developer"
-        description.text = "Intern level Mobile developer, changing the world and my life one code at a time"
+        textname.text = getString(R.string.displayname)
+        textskill.text = getString(R.string.skillname)
+        description.text = getString(R.string.textdescription)
 
-        adapter = IconRecyclerAdapter(this, IconData.iconC) {io ->
+        adapter = IconRecyclerAdapter(this, iconC) {io ->
             val url = io.url
             val intent = Intent()
             intent.data = Uri.parse(url)
@@ -36,4 +36,21 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
+
+    override fun onStart() {
+        super.onStart()
+        Log.i("Main Activity", "onStart called")
+    }
+    override fun onResume() {
+        super.onResume()
+        Log.i("Main Activity", "onResume called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("Main Activity", "onPause called")
+    }
+
 }
