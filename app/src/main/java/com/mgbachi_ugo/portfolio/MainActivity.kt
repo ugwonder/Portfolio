@@ -14,13 +14,16 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 class MainActivity : AppCompatActivity() {
 
     lateinit var adapter: IconRecyclerAdapter
+    private lateinit var sharedPreference: SharedPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        textname.text = "MGBACHI UGOCHUKWU"
-        textskill.text = "Mobile Developer"
-        description.text = "Intern level Mobile developer, changing the world and my life one code at a time"
+        sharedPreference = SharedPreference(applicationContext)
+        textname.text = sharedPreference.getName(Constants.KEY_NAME)
+        textskill.text = sharedPreference.getUserName(Constants.KEY_USERNAME)
+        description.text = sharedPreference.getEmail(Constants.KEY_EMAIL)
 
         adapter = IconRecyclerAdapter(this, IconData.iconC) {io ->
             val url = io.url
@@ -34,6 +37,9 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 3)
        recyclerView.setHasFixedSize(true)
 
+        btn_logout.setOnClickListener {
+            finish()
+        }
 
     }
 }
